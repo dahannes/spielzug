@@ -42,7 +42,7 @@ Binding for everyone working on the project – people and agents.
 
 ## Git
 
-- Repository: https://github.com/dahannes/spielzug (public, [PolyForm Noncommercial](../LICENSE.md); the history before 1.6.0 is in the private `spielzug-archive`), branch `main`. CI runs on every push and pull request (`.github/workflows/ci.yml`: commit messages, secret scan, quality report and mutation tests, `npm run check`). A `pre-push` hook runs `npm run check:fast`.
+- Repository: https://github.com/dahannes/spielzug (private until the maintainer makes it public, [PolyForm Noncommercial](../LICENSE.md); the history before 1.6.0 is in the private `spielzug-archive`), branch `main`. CI runs on every push and pull request (`.github/workflows/ci.yml`: commit messages, secret scan, quality report and mutation tests, `npm run check`). A `pre-push` hook runs `npm run check:fast`.
 - Small, meaningful commits in **Conventional Commits** form: `type(scope)!: subject`. Types: `feat`, `fix`, `perf`, `refactor`, `style`, `test`, `docs`, `build`, `ci`, `chore`, `revert`. Scopes are optional, e.g. `db`, `api`, `ui`, `dictation`, `player`, `trainer`, `deploy`. A commit hook (`commitlint`) rejects other messages.
 - `npm run check` before each commit. No attribution lines in commits.
 - Quality gates (import rules, knip, jscpd, mutation score; see [code quality](verification.md#code-quality)): fix the finding, never loosen the threshold or add an ignore without the maintainer's go.

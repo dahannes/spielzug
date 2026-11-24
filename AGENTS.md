@@ -21,7 +21,7 @@ All project knowledge lives in the repo, not in personal or tool-specific memory
 
 ## Open threads (2026-11-24)
 
-- Open source (decided 2026-11-24): one public repo with a single initial commit, PolyForm Noncommercial license; plan and remaining approvals in [docs/open-source-plan.md](docs/open-source-plan.md).
+- Open source (2026-11-24): new `dahannes/spielzug` with a single initial commit and issues #1–#18 recreated with the same numbers; still **private** – the maintainer decides when to make it public. The old repo is `spielzug-archive` (private, archived); full history also in `~/Backups/spielzug/spielzug-history-2026-11-24.bundle`. License PolyForm Noncommercial. Remaining items in [docs/open-source-plan.md](docs/open-source-plan.md).
 - Parked decisions (2026-11-21), recommendations in the issues: #5 team PIN (recommended: current PIN required + email-code reset), #6 shared device (name only via trainer PIN + "Rückgängig"), #7 Spielvorbereitung (words folded behind "Wörter ansehen"). Decide before #10 and #16; next build items #8, #9.
 - Live at the production URL (`docs/operations.private.md`). Each deploy only with the maintainer's go ([release procedure](docs/operations.md#release-procedure)).
 - Released 1.6.0 on 2026-11-24 (migration `20261124000000_ai_quotas`, `cadda58`): daily quotas for paid calls per account and a global cap (SR-44, ADR-044); debug view opt-in (SR-42). Tune the limits in `api/_lib/quota.ts` with real usage. Still to do by the maintainer: hard spend limit at Anthropic, AWS Budgets alert.
@@ -35,7 +35,7 @@ All project knowledge lives in the repo, not in personal or tool-specific memory
 - Reading the preparation steps aloud is deferred (needs a Polly recording).
 - Bracket forms ("laufen (läuft)") are stored but not dictated.
 - Backups: `npm run backup:prod` exists (manual, before releases and weekly); a restore has not been rehearsed yet.
-- Repository on GitHub (`dahannes/spielzug`, public since the switch in the [open-source plan](docs/open-source-plan.md); history before 1.6.0 in the private `spielzug-archive`) with CI; versions via `npm run release` (SemVer from Conventional Commits), version shown under Konto.
+- Repository on GitHub (`dahannes/spielzug`, private until the maintainer makes it public, see the [open-source plan](docs/open-source-plan.md); history before 1.6.0 in the private `spielzug-archive`) with CI; versions via `npm run release` (SemVer from Conventional Commits), version shown under Konto.
 - Langfuse keys still point to a demo project; a dedicated `spielzug` project is recommended.
 - Visual design pass: list card done (2026-11-13, `docs/design.md`); player card review open (eyebrow and radius alignment, column width). The wireframes predate the card switcher and B612.
 - Left open on purpose (review 2026-11-12): `LoginPage` stays one component; OpenCV.js stays (cached immutably on Vercel).
