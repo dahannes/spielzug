@@ -1,0 +1,16 @@
+# Never upload secrets, local certificates, photos or test output
+.env*
+!.env.example
+.certs
+photos
+*.jpg
+*.jpeg
+*.png
+!public/**
+test-results
+playwright-report
+dist
+node_modules
+supabase/.temp
+supabase/.branches
+.claude

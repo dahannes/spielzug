@@ -1,0 +1,37 @@
+node_modules
+dist
+dist-ssr
+*.tsbuildinfo
+coverage
+*.log
+.DS_Store
+.playwright-mcp
+
+# Playwright
+test-results
+playwright-report
+blob-report
+
+# Supabase CLI
+supabase/.temp
+supabase/.branches
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Secrets – never commit
+.certs
+.env
+.env.*
+!.env.example
+*.local
+.vercel
+
+# Mutation testing (npm run test:mutation)
+reports
+.stryker-tmp
+
+# Live operational values and private notes (docs/operations.private.md)
+*.private.md

@@ -1,0 +1,97 @@
+# Every push and pull request: commit messages, secret scan, quality report and mutation tests,
+# and the full `npm run check` (lint, quality gates, types, unit, server and DB tests, E2E on
+# tablet and phone) against a local Supabase.
+# Deploys stay manual (docs/operations.md).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Conventional Commits
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }}
+          elif [ "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]; then
+            npx commitlint --from ${{ github.event.before }} --to ${{ github.sha }}
+          else
+            npx commitlint --last
+          fi
+      - name: Secret scan
+        run: docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.21.2 git /repo --no-banner --redact
+
+  # Trends and test strength (docs/verification.md#code-quality). The hard gates (knip, jscpd,
+  # import rules) run in `npm run check`; here: the quality report in the job summary and
+  # mutation testing of shared/, incremental – only changed code and tests are re-run.
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run quality:report
+      - uses: actions/cache@v4
+        with:
+          path: reports/stryker-incremental.json
+          key: stryker-${{ hashFiles('shared/**', 'stryker.config.json') }}
+          restore-keys: stryker-
+      - run: npm run test:mutation
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mutation-report
+          path: reports/mutation
+          retention-days: 14
+
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # test-only key for the team PIN hash (not the production secret)
+      PIN_PEPPER: ci-only-pepper
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Start local Supabase
+        run: npx supabase start
+      # .env.local applies in every Vite mode (dev for E2E, test for unit tests); no cloud keys here
+      - name: Point the app at the local Supabase
+        run: |
+          npx supabase status -o env > /tmp/supabase.env
+          . /tmp/supabase.env
+          printf 'VITE_SUPABASE_URL=%s\nVITE_SUPABASE_PUBLISHABLE_KEY=%s\n' "$API_URL" "$PUBLISHABLE_KEY" > .env.local
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7

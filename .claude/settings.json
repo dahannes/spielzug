@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(npx vite *)",
+      "mcp__playwright__browser_resize",
+      "mcp__playwright__browser_file_upload",
+      "Bash(ipconfig getifaddr *)",
+      "Skill(claude-api)",
+      "Skill(claude-api:*)",
+      "Bash(docker --version)",
+      "Bash(git check-ignore *)",
+      "Bash(git tag *)"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "path": ["src", "shared", "api"],
+  "ignore": ["**/*.test.ts", "**/*.test.tsx", "**/database.types.ts"],
+  "threshold": 1,
+  "reporters": ["console"],
+  "noColors": true,
+  "silent": true
+}
