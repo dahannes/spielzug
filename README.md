@@ -39,7 +39,7 @@ flowchart LR
 
 | Doc | Answers |
 |---|---|
-| [AGENTS.md](AGENTS.md) | entry point for agents; open threads |
+| [AGENTS.md](AGENTS.md) | entry point for agents: rules and what to read first |
 | [docs/working-agreements.md](docs/working-agreements.md) | binding rules (language, child data, secrets, DB, git) |
 | [docs/requirements.md](docs/requirements.md) | what it must do: UR → SR with status and verification |
 | [docs/architecture.md](docs/architecture.md) | how it is built: flow, code map, routes, decisions |

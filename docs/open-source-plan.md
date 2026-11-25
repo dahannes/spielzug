@@ -44,7 +44,7 @@ Found in tracked files (search for account IDs, project ref, team, IAM users, em
 | `README.md` | `supabase link --project-ref <ref>`; `~/Backups/spielzug/` | placeholder; backup path stays (generic) |
 | `package.json` | `deploy:prod` with `--scope <vercel-team>` | team from `$VERCEL_SCOPE` |
 | `api/_lib/polly.ts` | IAM user name in a comment | "an IAM user that may only synthesize" |
-| `AGENTS.md` | open threads: live URL, release log, prod to-dos, the maintainer's devices | public `AGENTS.md` keeps the rules and the read-first list; the open threads go to the private file |
+| `AGENTS.md` | open threads: live URL, release log, prod to-dos, the maintainer's devices | public `AGENTS.md` keeps the rules and the read-first list; the open threads go to the private file – **done** 2026-11-25 |
 | `docs/working-agreements.md` | private repo URL | public repo URL |
 | `CHANGELOG.md` | 36 compare links to the private repo | start fresh in the public repo ("1.5.0 – initial public release", link to this history summary), or rewrite links |
 | `.claude/settings.json` | absolute home path | relative path, or leave `.claude/` out |

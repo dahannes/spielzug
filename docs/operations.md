@@ -34,7 +34,7 @@ Cloud services, environments and how we release. Local setup and npm scripts: [R
 5. **Env vars:** add or change Vercel env vars for production and preview if the release needs new ones.
 6. **Version and deploy:** `npm run release` (next version from the commits, `CHANGELOG.md`, tag), `git push --follow-tags`, then `npm run deploy:prod` (refuses uncommitted changes; passes the commit to the build). The version, commit and build date show in the trainer area under Konto.
 7. **Smoke test** on `<production-url>`: sign in, player card, trainer gate, open a list, start a round; then the open [manual checks](verification.md#manual-checks-not-automated) on the iPad.
-8. **Record:** add the release to the cloud state in `docs/operations.private.md` (untracked) and update the open threads in `AGENTS.md` (`docs:` commit).
+8. **Record:** add the release to the cloud state in `docs/operations.private.md` (untracked) and update its open threads (no commit: the file is untracked).
 
 ## Backups
 
@@ -49,7 +49,7 @@ Cloud services, environments and how we release. Local setup and npm scripts: [R
 
 **When:** before every release (step 2 above) and weekly. The folder holds children's data: keep it on the maintainer's machine or an encrypted disk, delete old runs when no longer needed (keep the last four).
 
-**Restore** (into a fresh Supabase project, or the local stack after `npm run db:reset` with the maintainer's go): apply `roles.sql`, `schema.sql`, then `data.sql` with `psql` against the target database; upload `storage/<bucket>/…` to the same paths with the secret key. Not rehearsed yet – see the open threads.
+**Restore** (into a fresh Supabase project, or the local stack after `npm run db:reset` with the maintainer's go): apply `roles.sql`, `schema.sql`, then `data.sql` with `psql` against the target database; upload `storage/<bucket>/…` to the same paths with the secret key. Not rehearsed yet.
 
 ## Current cloud state
 
