@@ -17,7 +17,7 @@ All project knowledge lives in the repo, not in personal or tool-specific memory
 
 ## Before committing
 
-`npm run check` (lint, quality gates, types, unit, DB, E2E). A quality gate fails → fix the code, not the threshold ([code quality](docs/verification.md#code-quality)). UI changes: go through the [design review checklist](docs/design.md#review-checklist-every-ui-change) with screenshots at tablet and phone width. Ask before `npm run db:reset` if the maintainer is using the local app. Never touch the cloud (push, deploy, env vars, AWS) without explicit approval.
+`npm run check` (lint, quality gates, types, unit, server, DB, E2E; needs Docker for the local Supabase). Without Docker run `npm run check:fast` and say in the handoff which levels did not run. A quality gate fails → fix the code, not the threshold ([code quality](docs/verification.md#code-quality)). UI changes: go through the [design review checklist](docs/design.md#review-checklist-every-ui-change) with screenshots at tablet and phone width. Ask before `npm run db:reset` if the maintainer is using the local app. Never `git push`, `supabase db push`, deploy, change env vars or touch AWS without explicit approval.
 
 ## Open threads
 

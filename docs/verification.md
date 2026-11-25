@@ -28,7 +28,7 @@ Most code is written by agents. They keep lint, types and complexity clean. What
 Rules:
 
 - **Fix the finding, never the threshold.** Remove dead code or an export instead of adding it to an ignore list. Extract a helper instead of copying. Write a test that kills the mutant. Raise the thresholds when the baseline improves; never lower them without the maintainer's go.
-- A `pre-push` hook runs `npm run check:fast` (lint, quality, types, unit tests; about 3 s). The hook skips DB and E2E tests; `npm run check` before each commit and CI run them.
+- A `pre-push` hook runs `npm run check:fast` (lint, quality, types, unit tests; about 3 s). The hook skips server, DB and E2E tests (they need the local Supabase); `npm run check` before each commit and CI run them.
 - Weakest mutation scores (2026-11-16): `compare.ts` 68 % (the letter-by-letter comparison), `league.ts` 66 %, `audio.ts` 71 %. The HTML report (`reports/mutation/index.html`, or the CI artifact `mutation-report`) lists the surviving mutants.
 
 ## Fakes
@@ -39,7 +39,7 @@ Rules:
 
 ## User validation
 
-Simulated persona runs (agents drive the local app with `AI_FAKE`, a facilitator merges the reports); results anonymised in `docs/validation/`. Latest: [2026-11-15](validation/2026-11-15-user-validation.md), with manual checks for a test with the real children.
+Simulated persona runs (agents drive the local app with `AI_FAKE`, a facilitator merges the reports); results anonymised in `docs/validation/`. The run kit and persona briefings are private (they name real people), so the reports here are the public record. Latest: [2026-11-15](validation/2026-11-15-user-validation.md), with manual checks for a test with the real children.
 
 ## Manual checks (not automated)
 

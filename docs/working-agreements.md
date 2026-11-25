@@ -33,7 +33,7 @@ Binding for everyone working on the project – people and agents.
 - Schema only via migrations; RLS on every table, explicit grants, `anon` gets nothing.
 - The cloud database is live: pushed migrations are never changed; every schema change is a new migration, shown to the maintainer before `db push --remote`.
 - **Ask before `npm run db:reset`** once someone uses the local app – it deletes accounts and word lists.
-- Anything that changes the cloud (`supabase db push`, deploys, env vars, AWS) only with explicit approval. Procedure: [operations](operations.md#release-procedure).
+- Anything that changes the cloud or GitHub (`supabase db push`, `git push`, deploys, env vars, AWS) only with explicit approval. Procedure: [operations](operations.md#release-procedure).
 
 ## Requirements and tests
 
