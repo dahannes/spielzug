@@ -4,7 +4,7 @@ Visual language: football collector cards (Panini sticker). The start page (`Pla
 
 ## Design tool
 
-The main UI tool is the **design canvas "Spielzug UX-Entwurf"**: https://claude.ai/artifact/UpsjxGtHUt8HTZfG8cmzLu (a claude.ai Design artifact, private to the maintainer's account; agents read and update it with the Artifact tool, never by web fetch).
+The main UI tool is the **design canvas "Spielzug UX-Entwurf"**: https://claude.ai/artifact/UpsjxGtHUt8HTZfG8cmzLu (a claude.ai Design artifact, private to the maintainer's account; agents read and update it with the Artifact tool, never by web fetch). Agents without access to it skip the canvas steps and say in their handoff which boards need an update (e.g. the sitemap W0); the code and this file are the source of truth.
 
 | Page | Content |
 |---|---|

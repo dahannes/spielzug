@@ -16,7 +16,7 @@ Goal: a public repository that shows responsible AI engineering in production ("
 | 3b | Abuse of the AI and voice endpoints | **built locally** (2026-11-24, SR-44, ADR-044): daily quotas per account and a global cap; `debug-scan` opt-in (`DEBUG_OPEN`, set only by `vite dev`). **live since 1.6.0** (2026-11-24) |
 | 3c | Budget alerts (Anthropic, AWS, Vercel, Supabase) | **needs go**: maintainer sets them in the consoles |
 | 4 | One repo, single initial commit | **done 2026-11-24, still private**: old repo renamed to `spielzug-archive` and archived; new `dahannes/spielzug` (private) with one commit and tag `v1.6.0`; issues #1–#18 recreated with the same numbers, labels, comments and state (recreated, not transferred: GitHub keeps an issue's edit history, which held the children's grades); local copy switched, commit email set to the GitHub noreply address. **Open:** make it public (maintainer) |
-| 5 | README for outside readers | **done** (2026-11-24): in `README.md` (intro, `docs/screenshot.png` with fictional data, guardrails, architecture diagram, local setup without cloud keys). Clean-clone test: `npm run check` green with only the local Supabase values plus `PIN_PEPPER` in `.env.local` (without it 15 E2E tests fail; now in the README). The draft below is superseded by the README |
+| 5 | README for outside readers | **done** (2026-11-24): in `README.md` (intro, `docs/screenshot.png` with fictional data, guardrails, architecture diagram, local setup without cloud keys). Clean-clone test: `npm run check` green with only the local Supabase values plus `PIN_PEPPER` in `.env.local` (without it 15 E2E tests fail; now in the README). |
 | 6 | License | **done**: PolyForm Noncommercial 1.0.0 in `LICENSE.md`, `package.json`, README |
 
 ## 1. Secret scan report
@@ -102,81 +102,9 @@ Proposed (one migration + API change; deploy needs a go):
 5. Switch the local working copy to the new repository and carry over the untracked files (`.env.local`, `.env.development.local`, `.certs/`, `.vercel/`, `docs/operations.private.md`). Deploys stay manual via the Vercel CLI (no Git integration to relink).
 6. Update the repository line in `docs/working-agreements.md` and AGENTS.md (public).
 
-## 5. README draft
+## 5. README
 
-Replaces the top of `README.md` in the public repo; the developer workflow below it stays.
-
-````markdown
-# Spielzug
-
-A learning app for primary school children, built and run for one family as a real product, not a demo.
-Parents photograph the school's word list. The app dictates the words; the child writes them on paper,
-photographs the sheet, and sees every mistake letter by letter. A football card and a league keep it fun.
-The UI is German.
-
-![Spielzug: player card and a checked dictation](docs/screenshot.png)
-
-## How AI is used responsibly here
-
-The app uses a vision model on children's handwriting. That calls for guardrails, and they are part of
-the code, the tests and the docs:
-
-- **Read blind.** The model transcribes the dictation without seeing the expected words, so it cannot
-  "correct" the child's spelling. A plain letter-by-letter comparison then decides (ADR-021).
-- **Confidence threshold.** A reading below 0.3 that does not match counts as "unleserlich" (illegible),
-  never as correct. The model does not get the benefit of the doubt.
-- **Schema-checked output.** Every model answer is validated with zod; invalid answers are errors,
-  not guesses.
-- **No real AI in tests.** `AI_FAKE=1` gives fixed outputs: unit, server and E2E tests never call an
-  LLM or the speech service, cost nothing and are deterministic.
-- **Child data stays in the EU and stays minimal.** Database and files in Frankfurt (Supabase),
-  speech in eu-central-1 (Amazon Polly), traces in Langfuse EU – traces carry the request and the image
-  size, never the image. Photos are of paper only; a child's portrait is redrawn on the device and only
-  the drawing is stored. Where every piece of data lives and when it is deleted: [data map](docs/data-map.md).
-- **Row Level Security everywhere.** Every table has RLS and explicit grants; `anon` gets nothing.
-  The policies are tested with pgTAP.
-- **Cost guardrails.** Every AI endpoint needs a signed-in session; image size, token budget, timeouts
-  and daily quotas per team are limited.
-- **Traceable requirements.** User and system requirements with status and verification
-  ([requirements](docs/requirements.md)); tests carry the requirement id, e.g. `[SR-24]`. Lasting
-  decisions are ADRs in [architecture](docs/architecture.md).
-- **Quality gates against agent drift.** Much of the code was written with AI coding agents under binding
-  [working agreements](docs/working-agreements.md). Lint, import rules, dead-code and duplication checks,
-  mutation tests and a secret scan run in CI and as a pre-push hook.
-
-## Architecture
-
-```mermaid
-flowchart LR
-  subgraph Device["iPad / phone (PWA)"]
-    UI["React app"] --> CV["OpenCV.js<br/>straighten, crop"]
-  end
-  UI -- "Supabase JS + RLS" --> SB[("Supabase (Frankfurt)<br/>Postgres, Auth, Storage")]
-  UI -- "Bearer token" --> API["Vercel functions api/<br/>(fra1)"]
-  API -- "image, blind" --> LLM["Claude Haiku<br/>vision"]
-  API -- "SSML" --> POLLY["Amazon Polly<br/>eu-central-1"]
-  API -- "spans, no images" --> LF["Langfuse EU"]
-  API -- "as the user / secret key for audio" --> SB
-```
-
-## Run it without any cloud account
-
-Needs Node.js 24 and Docker.
-
-```bash
-npm install
-npx playwright install chromium
-npm run db:start                 # local Supabase in Docker
-npm run db:status                # shows API_URL, PUBLISHABLE_KEY, SECRET_KEY
-# .env.local with the local values (see .env.example), then:
-AI_FAKE=1 npm run dev            # fixed AI answers, no keys, no costs
-npm run check                    # lint, quality gates, types, unit, DB and E2E tests
-```
-
-Sign up with any email; the 6-digit code appears in Mailpit at http://127.0.0.1:54324.
-````
-
-Still open for step 5: a screenshot with fictional data (local stack, stock-photo player), and a test of the "without any cloud account" path in a clean clone. Then fix the README where it fails. The quota line in the guardrails list holds in the code since 2026-11-24 (live since 1.6.0).
+Done: the intro, guardrails, architecture and local setup without cloud keys are in [`README.md`](../README.md); the earlier draft is in the git history.
 
 ## 6. License
 

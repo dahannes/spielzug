@@ -49,7 +49,7 @@ Child:   player card (start) ─► ▶ Training starten ──► dictation_rou
 | `src/features/trainer/` | `TrainerPages` (PIN gate, Team / Wörterlisten / Konto, invitations), `gate.ts` |
 | `src/features/dictation/` | `queries.ts`, word list pages, `RoundPage` → `DictationSteps` / `CorrectionSteps` (Berichtigung) / `RoundResult` (+ `ScanPanel`), `roundStep.ts` (step kept per tab, double-tap guard), `VoicePicker` |
 | `src/features/debug/` | `/debug/scan` |
-| `src/components/` | `ui.tsx` (Button, shared bottom-sheet/full-screen `Dialog`, …), `SwipeRow` (draggable horizontal list), `styles.ts`, `PhotoCapture` |
+| `src/components/` | `ui.tsx` (Button, shared bottom-sheet/full-screen `Dialog`, …), `SwipeRow` (draggable horizontal list), `styles.ts`, `PhotoCapture`, `Logo` |
 | `src/lib/` | `api.ts` (the one client for `api/`), `apiError.ts`, `supabase.ts`, `speech.ts`, `photo/` (sheet preparation with OpenCV; `stylize.ts` + `portrait.ts` for player photos) |
 | `api/` | one function per endpoint: `read-word-list`, `read-vocab-list`, `read-dictation`, `prepare-audio`, `delete-word-list`, `delete-player`, `delete-team`, `debug-scan`, `create-team-invitation`, `accept-team-invitation`, `team-pin`; `_lib/`: `http.ts` (handler, error codes), `auth.ts`, `storage.ts` (removing files and folders with the secret key), `llm.ts` (the one LLM call, `AI_FAKE`), `prompts.ts`, `polly.ts`, `tracing.ts` |
 | `supabase/` | `migrations/` (schema, RLS, grants, buckets), `tests/database/` (pgTAP), `templates/otp.html` |

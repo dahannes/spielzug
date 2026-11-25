@@ -48,8 +48,10 @@ Binding for everyone working on the project – people and agents.
 - Quality gates (import rules, knip, jscpd, mutation score; see [code quality](verification.md#code-quality)): fix the finding, never loosen the threshold or add an ignore without the maintainer's go.
 - **Semantic versioning**, derived from the commits by `npm run release`: `fix`/`perf` → patch, `feat` → minor, `!` or `BREAKING CHANGE:` → major. It updates `package.json` and `CHANGELOG.md` and tags `vX.Y.Z`; production only ever runs a tagged version.
 - Pushed history is never rewritten (no force-push on `main`).
+- Alpha phase: finished work goes straight into `main` (small branch → `npm run check` → rebase-merge right away); no open PRs waiting, PR descriptions short.
+- Uncommitted changes in the maintainer's checkout (often docs) are the maintainer's: ask before committing them.
 
 ## Effort
 
-- Alpha phase: choose the lightest adequate path. Be thorough where it lasts: data model, security model.
+- Alpha phase: choose the lightest adequate path; keep replies and status updates short. Be thorough where it lasts: data model, security model.
 - Ask about open decisions instead of guessing; where a convention has a clear standard, use it and say so.

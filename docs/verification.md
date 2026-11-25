@@ -28,7 +28,7 @@ Most code is written by agents. They keep lint, types and complexity clean. What
 Rules:
 
 - **Fix the finding, never the threshold.** Remove dead code or an export instead of adding it to an ignore list. Extract a helper instead of copying. Write a test that kills the mutant. Raise the thresholds when the baseline improves; never lower them without the maintainer's go.
-- A `pre-push` hook runs `npm run check:fast` (lint, quality, types, unit tests; about 3 s). DB and E2E tests run only in CI.
+- A `pre-push` hook runs `npm run check:fast` (lint, quality, types, unit tests; about 3 s). The hook skips DB and E2E tests; `npm run check` before each commit and CI run them.
 - Weakest mutation scores (2026-11-16): `compare.ts` 68 % (the letter-by-letter comparison), `league.ts` 66 %, `audio.ts` 71 %. The HTML report (`reports/mutation/index.html`, or the CI artifact `mutation-report`) lists the surviving mutants.
 
 ## Fakes

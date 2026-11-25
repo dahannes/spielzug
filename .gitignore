@@ -27,6 +27,7 @@ supabase/.branches
 .env.*
 !.env.example
 *.local
+.claude/settings.local.json
 .vercel
 
 # Mutation testing (npm run test:mutation)
