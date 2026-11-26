@@ -18,7 +18,7 @@ Goal: a public repository that shows responsible AI engineering in production ("
 | 4 | One repo, single initial commit | **done** (2026-11-24), still private: issues #1–#18 recreated with the same numbers, labels, comments and state (recreated, not transferred: an issue's edit history held the children's grades); commits use the GitHub noreply address |
 | 5 | README for outside readers | **done** (2026-11-24): intro, screenshot with fictional data, guardrails, architecture, local setup without cloud keys |
 | 6 | License | **done**: PolyForm Noncommercial 1.0.0 in `LICENSE.md`, `package.json`, README |
-| 7 | Make the repository public | **open**: the maintainer decides when |
+| 7 | Make the repository public | **done** (2026-11-26) |
 
 ## Secret scan report
 
