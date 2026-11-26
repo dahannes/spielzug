@@ -14,7 +14,7 @@ Cloud services, environments and how we release. Local setup and npm scripts: [R
 | Vercel | frontend + `api/` functions, region `fra1`, 60 s limit | team `<vercel-team>`, project linked in `.vercel/project.json` – `<production-url>` |
 | Anthropic | LLM reads word lists and dictations (`claude-haiku-5-5`, ADR-017) | `ANTHROPIC_API_KEY` |
 | Amazon Polly | dictation voice (Daniel, neural), eu-central-1 (ADR-022) | AWS account `<aws-account>`, an IAM user that may only synthesize speech; `AWS_*` |
-| Amazon SES | auth emails (6-digit codes) as Supabase's SMTP, eu-central-1, sender `<ses-sender>` | an IAM user that may only send as that address; credentials only in the Supabase auth config. **Sandbox:** ≤ 200 mails/day, only to verified addresses – verify with `aws sesv2 create-email-identity` or request production access |
+| Amazon SES | auth emails (6-digit codes) as Supabase's SMTP, eu-central-1, sender `<ses-sender>` from the domain identity `<app-domain>` (Easy DKIM; DMARC `p=none` on the app domain) | an IAM user that may only send as that address; credentials only in the Supabase auth config. **Sandbox:** ≤ 200 mails/day, only to verified addresses – verify with `aws sesv2 create-email-identity` or request production access |
 | Langfuse | traces, cost, eval datasets (EU cloud) | `LANGFUSE_*`; a dedicated `spielzug` project is still to be created |
 
 ## Environments
@@ -72,7 +72,7 @@ AWS notes:
 
 The release log (which migrations and commits are live, backups taken) is in `docs/operations.private.md`. Configuration that the code relies on:
 
-- Auth (set through the Management API `PATCH /v1/projects/<project-ref>/config/auth`, never `config push`): site URL and redirect `<production-url>/**`, "Confirm email" on, password ≥ 8, 6-digit codes valid 600 s, templates from `supabase/templates/otp.html` with subject "Dein Spielzug-Code" (confirm signup, reset password, magic link). Custom templates need custom SMTP on the free plan – hence SES. Sign-up is still open.
+- Auth (set through the Management API `PATCH /v1/projects/<project-ref>/config/auth`, never `config push`): site URL `<production-url>`, redirects `<production-url>/**` and the old Vercel URL `/**` (transition), "Confirm email" on, password ≥ 8, 6-digit codes valid 600 s, templates from `supabase/templates/otp.html` with subject "Dein Spielzug-Code" (confirm signup, reset password, magic link). Custom templates need custom SMTP on the free plan – hence SES. Sign-up is still open.
 - Vercel env vars for production and preview: see [Environments](#environments); `PIN_PEPPER` has its own cloud value.
 
 ## Gotchas

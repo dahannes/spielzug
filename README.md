@@ -2,7 +2,7 @@
 
 A learning app for primary school children, built and run for one family as a real product, not a demo. Parents photograph the school's word list. The app dictates the words; the child writes them on paper, photographs the sheet and sees every mistake letter by letter. A football card and a league keep it fun. The UI is German.
 
-Live: https://spielzug-nu.vercel.app (sign-up is not open to the public yet).
+Live: https://spielzug.johannessiedler.de (sign-up is not open to the public yet).
 
 ![Spielzug: player card on the tablet and a checked dictation on the phone (fictional data)](docs/screenshot.png)
 
