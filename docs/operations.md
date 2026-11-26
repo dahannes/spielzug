@@ -58,7 +58,7 @@ The paid calls are capped per day in `api/_lib/quota.ts` (SR-44); that bounds th
 | Service | Where to see cost | Alert / limit |
 |---|---|---|
 | Anthropic | Console → Usage and Cost; Langfuse per trace | monthly spend limit and a notification below it (Console → Settings → Limits) |
-| AWS (Polly, SES) | Billing and Cost Management → Cost Explorer, grouped by service | budget `monthly-5usd` (email at 50 % and 100 % actual, 100 % forecast); `Default-Services-Monitor` (Cost Anomaly Detection, daily email) |
+| AWS (Polly, SES) | Billing and Cost Management → Cost Explorer, grouped by service | budget `monthly-10usd` (email at 85 % and 100 % actual, 100 % forecast; delivered through AWS User Notifications, the recipient address must be verified once); `Default-Services-Monitor` (Cost Anomaly Detection, daily email) |
 | Supabase | Organization → Usage | free-plan limits; no alert |
 | Vercel | Project → Usage | Hobby limits; no alert |
 | Langfuse | the project's usage page | free-tier units |

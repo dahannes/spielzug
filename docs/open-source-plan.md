@@ -14,7 +14,7 @@ Goal: a public repository that shows responsible AI engineering in production ("
 | 2 | Docs public-safe | **done** (2026-11-21): live values in the untracked `docs/operations.private.md`, placeholders in the tracked docs; validation doc without grades or traits of real children; open threads out of `AGENTS.md` (2026-11-25) |
 | 3a | Sign-up open to strangers | **open**, see [Before strangers can join](#before-strangers-can-join) |
 | 3b | Abuse of the AI and voice endpoints | **done**: daily quotas per account and a global cap, `debug-scan` opt-in (SR-42, SR-44, ADR-044); live since 1.6.0 |
-| 3c | Budget alerts | **partly** (2026-11-26): AWS Cost Anomaly Detection and IAM billing access in place; AWS budget and Anthropic spend limit open, see [Budget alerts](#budget-alerts) and [costs and alerts](operations.md#costs-and-alerts) |
+| 3c | Budget alerts | **partly** (2026-11-26): AWS budget, Cost Anomaly Detection and IAM billing access in place; Anthropic spend limit open, see [Budget alerts](#budget-alerts) and [costs and alerts](operations.md#costs-and-alerts) |
 | 4 | One repo, single initial commit | **done** (2026-11-24), still private: issues #1–#18 recreated with the same numbers, labels, comments and state (recreated, not transferred: an issue's edit history held the children's grades); commits use the GitHub noreply address |
 | 5 | README for outside readers | **done** (2026-11-24): intro, screenshot with fictional data, guardrails, architecture, local setup without cloud keys |
 | 6 | License | **done**: PolyForm Noncommercial 1.0.0 in `LICENSE.md`, `package.json`, README |
