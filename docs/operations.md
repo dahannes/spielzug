@@ -51,6 +51,23 @@ Cloud services, environments and how we release. Local setup and npm scripts: [R
 
 **Restore** (into a fresh Supabase project, or the local stack after `npm run db:reset` with the maintainer's go): apply `roles.sql`, `schema.sql`, then `data.sql` with `psql` against the target database; upload `storage/<bucket>/…` to the same paths with the secret key. Not rehearsed yet.
 
+## Costs and alerts
+
+The paid calls are capped per day in `api/_lib/quota.ts` (SR-44); that bounds the number of calls, not money. On top, every paid service has its own limit or alert:
+
+| Service | Where to see cost | Alert / limit |
+|---|---|---|
+| Anthropic | Console → Usage and Cost; Langfuse per trace | monthly spend limit and a notification below it (Console → Settings → Limits) |
+| AWS (Polly, SES) | Billing and Cost Management → Cost Explorer, grouped by service | budget `monthly-5usd` (email at 50 % and 100 % actual, 100 % forecast); `Default-Services-Monitor` (Cost Anomaly Detection, daily email) |
+| Supabase | Organization → Usage | free-plan limits; no alert |
+| Vercel | Project → Usage | Hobby limits; no alert |
+| Langfuse | the project's usage page | free-tier units |
+
+AWS notes:
+- Billing pages in the console need "IAM user and role access to Billing information" (Account settings, root only) in addition to the user's own permissions. The Cost Explorer API works without it.
+- Cost Explorer and Budgets are global and answer from `us-east-1`; console sign-ins are logged in CloudTrail in the region of the sign-in endpoint (root: `us-east-1`).
+- Budgets only send email, they never stop a service.
+
 ## Current cloud state
 
 The release log (which migrations and commits are live, backups taken) is in `docs/operations.private.md`. Configuration that the code relies on:
